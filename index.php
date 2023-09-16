@@ -1,3 +1,24 @@
+<?php
+// Konfigurasi database
+$host = "localhost"; // Ganti dengan nama host database Anda
+$database = "db_dimas_dina"; // Ganti dengan nama database Anda
+$username = "root"; // Ganti dengan nama pengguna database Anda
+$password = ""; // Ganti dengan kata sandi database Anda
+
+try {
+    // Membuat koneksi PDO
+    $pdo = new PDO("mysql:host=$host;dbname=$database", $username, $password);
+
+    // Set mode error untuk PDO ke Exception
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Jika koneksi sukses, Anda bisa melakukan operasi database di sini
+} catch (PDOException $e) {
+    // Tangani kesalahan jika koneksi gagal
+    echo "Koneksi database gagal: " . $e->getMessage();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -651,24 +672,221 @@ gtag("config", "G-R30WMHF2H3");
 				</div>
 				<div class="elementor-element elementor-element-f86ab23 wdp-sticky-section--no elementor-widget elementor-widget-weddingpress-kit2" data-id="f86ab23" data-element_type="widget" data-settings="{&quot;attendence&quot;:&quot;yes&quot;}" data-widget_type="weddingpress-kit2.default">
 				<div class="elementor-widget-container">
-			<div class='cui-wrapper cui-golden cui-border' style='overflow: hidden;'><div class='cui-wrap-link'><div class='header-cui'><a id='cui-link-44645' class='cui-link cui-icon-link cui-icon-link-true auto-load-true' href='g2a_2.html' title='1 Comment'><span>1</span> Comment</a></div></div><!--.cui-wrap-link--><div id='cui-wrap-commnent-44645' class='cui-wrap-comments' style='display:block;'><div id='cui-wrap-form-44645' class='cui-clearfix'><div class="cui-comment-attendence"><div id="invitation-count-44645" class="cui_comment_count_card_wrap"><div class="cui_comment_count_card_row"><div class="cui_comment_count_card cui_card-hadir"><span>0</span><span>Hadir</span></div><div class="cui_comment_count_card cui_card-tidak_hadir"><span>0</span><span>Tidak hadir</span></div><div class="cui_comment_count_card cui_card-masih_ragu"><span>0</span><span>Masih Ragu</span></div></div></div></div><div class="cui-clearfix cui-wrap-form "><div id='cui-container-form-44645' class='cui-container-form cui-no-login'><div id='respond-44645' class='respond cui-clearfix'><form action='https://eninvitation.com/wp-comments-post.php' method='post' id='commentform-44645'><p class="comment-form-author cui-field-1"><input id="author" name="author" type="text" aria-required="true" class="cui-input" placeholder="Nama" /><span class="cui-required">*</span><span class="cui-error-info cui-error-info-name">Mohon maaf! Khusus untuk tamu undangan</span></p><div class="cui-wrap-textarea"><textarea id="cui-textarea-44645" class="waci_comment cui-textarea autosize-textarea" name="comment" aria-required="true" placeholder="Ucapan" rows="2"></textarea><span class="cui-required">*</span><span class="cui-error-info cui-error-info-text">2 characters minimum.</span></div>
-        <div class="nm-wrap-comments">     
-        <div class="row">        
-</div>
-</div>    <div class="cui-clearfix cui-wrap-select cui-field-wrap cui-select-attending">
-        
-    <select class="waci_comment cui-select" name="konfirmasi" id="konfirmasi">
-        <option value="" disabled selected>Konfirmasi Kehadiran</option>
-        </option><option value="Hadir">Hadir</option>
-        <option value="Tidak hadir">Tidak hadir</option>
-                <option value="Masih Ragu">Masih Ragu</option>
-                        </select><span class="cui-required"></span><span class="cui-error-info cui-error-info-confirm"></span>
-    </div>
+			<div class='cui-wrapper cui-golden cui-border' style='overflow: hidden;'>
+				<div class='cui-wrap-link'>
+					<div class='header-cui'>
+						<a id='cui-link-44645' class='cui-link cui-icon-link cui-icon-link-true auto-load-true' title='1 Comment'>
+							<span>1</span> Comment
+						</a>
+					</div>
+				</div><!--.cui-wrap-link-->
+				<div class='cui-wrap-comments' style='display:block;'>
+					<div class='cui-clearfix'>
+						<div class="cui-comment-attendence">
+							<div class="cui_comment_count_card_wrap">
+								<div class="cui_comment_count_card_row">
+									<div class="cui_comment_count_card cui_card-hadir">
+										<span id="jumlahHadir" >0</span>
+										<span>Hadir</span>
+									</div>
+									<div class="cui_comment_count_card cui_card-tidak_hadir">
+										<span id="jumlahTidakHadir" >0</span>
+										<span>Tidak hadir</span>
+									</div>
+									<div class="cui_comment_count_card cui_card-masih_ragu">
+										<span id="jumlahMasihRagu" >0</span>
+										<span>Masih Ragu</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="cui-clearfix cui-wrap-form ">
+							<div class='cui-container-form cui-no-login'>
+								<div class='respond cui-clearfix'>
+									<div id="pesanMasuk"></div>
+								<form id="kirimUcapan">
+									<p class="comment-form-author cui-field-1">
+										<input id="nama" name="nama" type="text" required class="cui-input" placeholder="Nama" />
+										<span class="cui-required">*</span>
+										<span class="cui-error-info cui-error-info-name">Mohon maaf! Hanya untuk tamu undangan</span>
+									</p>
+									<div class="cui-wrap-textarea">
+										<textarea class="waci_comment cui-textarea autosize-textarea" id="ucapan" name="ucapan" required placeholder="Ucapan" rows="2"></textarea>
+										<span class="cui-required">*</span>
+										<span class="cui-error-info cui-error-info-text">Minimal 2 Karakter.</span>
+									</div>
+									<div class="nm-wrap-comments">
+										<div class="row">
+										</div>
+									</div>
+									<div class="cui-clearfix cui-wrap-select cui-field-wrap cui-select-attending">
+										<select class="waci_comment cui-select" name="konfirmasi" id="konfirmasi" required>
+											<option value="" disabled selected>Konfirmasi Kehadiran</option>
+											<option value="Hadir">Hadir</option>
+											<option value="Tidak hadir">Tidak hadir</option>
+											<option value="Masih Ragu">Masih Ragu</option>
+										</select>
+										<span class="cui-required"></span>
+										<span class="cui-error-info cui-error-info-confirm">Harap pilih salah satu</span>
+									</div>
+									<button class="btn btn-primary" id="KirimData">Kirim</button>
+								</form>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+	// Fungsi untuk mengubah waktu menjadi format yang lebih deskriptif
+function formatTimeAgo(timestamp) {
+    const now = new Date();
+    const commentTime = new Date(timestamp);
+    const timeDifference = now - commentTime;
     
-        
-    <div class='cui-wrap-submit cui-clearfix'><p class='form-submit'><span class="cui-hide">Do not change these fields following</span><input type="text" class="cui-hide" name="name" value="username"><input type="text" class="cui-hide" name="nombre" value=""><input type="text" class="cui-hide" name="form-cui" value=""><input type="button" class="cui-form-btn cui-cancel-btn" value="Cancel"><input name='submit' id='submit-44645' value='Kirim' type='submit' /><input type='hidden' name='commentpress' value='true' /><input type='hidden' name='comment_post_ID' value='44645' id='comment_post_ID' />
-<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
-</p></div></form></div></div><!--.cui-container-form--></div><!--.cui-clearfix cui-relative--></div><!--.cui-wrap-form--><div id='cui-comment-status-44645'  class='cui-comment-status'></div><div id='cui-box' class='cui-box'><ul id='cui-container-comment-44645' class='cui-container-comments cui-order-DESC ' data-order='DESC'></ul></div><div class='cui-holder-44645 cui-holder'></div></div><!--.cui-wrap-comments--></div><!--.cui-wrapper-->            <style>
+    if (timeDifference < 1000) {
+        return 'baru saja';
+    } else if (timeDifference < 60000) {
+        const seconds = Math.floor(timeDifference / 1000);
+        return `${seconds} detik yang lalu`;
+    } else if (timeDifference < 3600000) {
+        const minutes = Math.floor(timeDifference / 60000);
+        return `${minutes} menit yang lalu`;
+    } else if (timeDifference < 86400000) {
+        const hours = Math.floor(timeDifference / 3600000);
+        return `${hours} jam yang lalu`;
+    } else if (timeDifference < 604800000) {
+        const days = Math.floor(timeDifference / 86400000);
+        return `${days} hari yang lalu`;
+    } else if (timeDifference < 2419200000) {
+        const weeks = Math.floor(timeDifference / 604800000);
+        return `${weeks} minggu yang lalu`;
+    } else if (timeDifference < 29030400000) {
+        const months = Math.floor(timeDifference / 2419200000);
+        return `${months} bulan yang lalu`;
+    } else {
+        const years = Math.floor(timeDifference / 29030400000);
+        return `${years} tahun yang lalu`;
+    }
+}
+
+    $(document).ready(function () {
+		// Fungsi untuk memperbarui jumlah ucapan
+        function updateJumlahUcapan() {
+            // Mengirim permintaan AJAX ke server
+            $.ajax({
+                type: "GET",
+                url: "ambil_jumlah_ucapan.php", // Ganti dengan URL endpoint yang sesuai
+                dataType: "json", // Mengharapkan respons dalam format JSON
+                success: function (data) {
+					// Memperbarui jumlah ucapan pada masing-masing kategori
+					$("#jumlahHadir").text(data.hadir || 0);
+					$("#jumlahTidakHadir").text(data.tidak_hadir || 0);
+					$("#jumlahMasihRagu").text(data.masih_ragu || 0);
+                },
+				error: function (xhr, status, error) {
+					// Menampilkan pesan kesalahan yang lebih informatif
+					console.log("Status: " + status);
+					console.log("Error: " + error);
+				}
+            });
+        }
+
+        // Memanggil fungsi updateJumlahUcapan saat halaman dimuat
+        updateJumlahUcapan();
+
+		    // Fungsi untuk memuat dan menampilkan komentar
+		function loadComments() {
+        // Mengirim permintaan AJAX ke server
+        $.ajax({
+            type: "GET",
+            url: "ambil_komentar.php", // Ganti dengan URL endpoint server Anda
+            dataType: "json",
+            success: function (data) {
+                // Mengosongkan daftar komentar
+                $("#TampilKomentar").empty();
+
+                // Loop melalui data komentar
+                for (var i = 0; i < data.length; i++) {
+                    var comment = data[i];
+                    var konfirmasi = comment.konfirmasi;
+                    var svgIcon = "";
+
+                    // Memilih ikon sesuai dengan konfirmasi
+                    if (konfirmasi === "Masih Ragu") {
+                        svgIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" ...></svg>';
+                    } else if (konfirmasi === "Hadir") {
+                        svgIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" ...></svg>';
+                    } else if (konfirmasi === "Tidak Hadir") {
+                        svgIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" ...></svg>';
+                    }
+
+                    // Membangun tampilan komentar
+                    var commentHtml = '<li class="comment odd alt thread-odd thread-alt depth-1 cui-item-comment animated fadeIn">';
+                    commentHtml += '<div class="cui-comment">';
+                    commentHtml += '<div class="cui-comment-avatar">';
+                    commentHtml += '<img src="">';
+                    commentHtml += '</div>';
+                    commentHtml += '<div class="cui-comment-content">';
+                    commentHtml += '<div class="cui-comment-info">';
+                    commentHtml += '<a class="cui-commenter-name" title="' + comment.nama + '">' + comment.nama + '</a>';
+                    commentHtml += '<span class="cui-post-author-mark cui-post-author-' + konfirmasi.toLowerCase() + '">' + svgIcon + '</span>';
+                    commentHtml += '</div>';
+                    commentHtml += '<div class="cui-comment-text">';
+                    commentHtml += '<p>' + comment.ucapan + '</p>';
+                    commentHtml += '</div>';
+                    commentHtml += '<div class="cui-comment-actions">';
+					commentHtml += '<span class="cui-comment-time"><i class="far fa-clock"></i> ' + formatTimeAgo(comment.waktu) + '</span>';
+                    commentHtml += '</div>';
+                    commentHtml += '</div>';
+                    commentHtml += '</div>';
+                    commentHtml += '</li>';
+
+                    // Menambahkan komentar ke daftar komentar
+                    $("#TampilKomentar").append(commentHtml);
+                }
+            },
+            error: function (error) {
+                console.log("Error: " + error);
+            }
+        });
+    }
+	loadComments();
+
+        $("#KirimData").click(function (e) {
+            e.preventDefault();
+            // Mengambil nilai-nilai dari formulir
+            var nama = $("#nama").val();
+            var ucapan = $("#ucapan").val();
+            var konfirmasi = $("#konfirmasi").val();
+
+            // Membuat objek data yang akan dikirim
+            var data = {
+                nama: nama,
+                ucapan: ucapan,
+                konfirmasi: konfirmasi
+			};
+
+            // Mengirim data menggunakan AJAX
+            $.ajax({
+                type: "POST",
+                url: "simpan_tamu_undangan.php",
+                data: data,
+                success: function (response) {
+                    // Menampilkan pesan sukses di konsol
+                    $("#pesanMasuk").html("<p>Terima kasih atas komentarnya ya...</p>");
+					updateJumlahUcapan();
+					loadComments();
+                }
+            });
+        });
+    });
+</script>
+								</div>
+							</div>
+						</div>
+						<div id="cui-comment-status-44645" class="cui-comment-status" style="display: none;"></div>
+						<div id="cui-box" class="cui-box">
+							<ul id="TampilKomentar" class="cui-container-comments cui-order-DESC  cui-has-13-comments cui-multiple-comments" data-order="DESC" style="display: block;"></ul>
+						</div>
+						<div class="cui-holder-44645 cui-holder"></div>
+						
+<style>
                 .cui-wrapper .cui-holder {
                     display: block !important;
                 }
@@ -907,8 +1125,19 @@ gtag("config", "G-R30WMHF2H3");
 
                                     
                                                                                 <div class="wdp-dear" style="width: auto !important;font-family:'Tangerine',sans-serif !important" >Bapak/Ibu/Saudara/i</div>
-                                                                        <div class="wdp-name namatamu" style="width: auto !important;"></div>
-                                                                                    <div class="wdp-text" style="width: auto !important;font-family:'Tangerine',sans-serif !important;font-size:27px;" >Tanpa mengurangi rasa hormat, kami bermaksud mengundang Anda untuk menghadiri acara pernikahan kami.</div>
+																				<div class="wdp-name namatamu" style="width: auto !important; font-family: 'GreatVibes', sans-serif !important;font-size:27px;">
+        <?php
+        // Mengambil nilai dari parameter GET "to"
+        $tamu = $_GET['to'] ?? '';
+
+        // Memeriksa apakah ada nilai "to" yang diberikan
+        if (!empty($tamu)) {
+            echo $tamu;
+        } else {
+            echo "Tamu Undangan";
+        }
+        ?>
+    </div>                                                                                    <div class="wdp-text" style="width: auto !important;font-family:'Tangerine',sans-serif !important;font-size:27px;" >Tanpa mengurangi rasa hormat, kami bermaksud mengundang Anda untuk menghadiri acara pernikahan kami.</div>
                                         
                                     <div class="wdp-button-wrapper" id="wdp-button-wrapper">
 										<button class="elementor-button" style="font-family:'Tangerine',sans-serif !important" onclick="startVideo()">
@@ -1071,9 +1300,6 @@ document.getElementsByClassName("wdp-button-wrapper").addEventListener('click', 
 <script type='text/javascript' src='assets/plugins/weddingpress/assets/js/wdp-horizontal.js' id='wdp-horizontal-js-js'></script>
 <script type='text/javascript' src='assets/plugins/weddingpress/assets/js/exad-scripts.min.js' id='exad-main-script-js'></script>
 <script type='text/javascript' id='cui_js_script-js-extra'>
-/* <![CDATA[ */
-var CUI_WP = {"ajaxurl":"https:\/\/eninvitation.com\/wp-admin\/admin-ajax.php","cuiNonce":"8af7b4ecf6","jpages":"true","jPagesNum":"10","textCounter":"true","textCounterNum":"500","widthWrap":"","autoLoad":"true","thanksComment":"Thanks for your comment!","thanksReplyComment":"Thanks for answering the comment!","duplicateComment":"You might have left one of the fields blank, or duplicate comments","accept":"Accept","cancel":"Cancel","reply":"Reply","textWriteComment":"Ucapan","classPopularComment":"cui-popular-comment","textToDisplay":"Text to display","textCharacteresMin":"2 characters minimum","textNavNext":"Next","textNavPrev":"Previous","textMsgDeleteComment":"Do you want delete this comment?","textLoadMore":"Load more"};
-/* ]]> */
 </script>
 <script type='text/javascript' src='assets/plugins/weddingpress/addons/comment-kit2/js/cui_script.js' id='cui_js_script-js'></script>
 <script type='text/javascript' src='assets/plugins/weddingpress/addons/comment-kit2/js/libs/jquery.jPages.min.js' id='cui_jPages-js'></script>
