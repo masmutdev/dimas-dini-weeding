@@ -201,8 +201,8 @@ gtag("config", "G-R30WMHF2H3");
 								<div class="elementor-element elementor-element-6695d58 wdp-sticky-section--no elementor-widget elementor-widget-video" data-id="6695d58" data-element_type="widget" data-settings="{&quot;video_type&quot;:&quot;hosted&quot;,&quot;autoplay&quot;:&quot;yes&quot;,&quot;play_on_mobile&quot;:&quot;yes&quot;,&quot;mute&quot;:&quot;yes&quot;,&quot;loop&quot;:&quot;yes&quot;}" data-widget_type="video.default">
 				<div class="elementor-widget-container">
 					<div class="e-hosted-video elementor-wrapper elementor-open-inline">
-					<video class="elementor-video" src="assets/videos/video-dimas-dina.mp4" autoplay="" loop="" muted playsinline=""></video>
-				</div>
+						<video class="elementor-video" id="myVideo" src="assets/videos/video-dimas-dina.mp4" loop="" muted playsinline=""></video>
+					</div>
 				</div>
 				</div>
 				<!--<div class="elementor-element elementor-element-3378ac8e elementor-absolute goyang-1 e-transform wdp-sticky-section--no elementor-invisible elementor-widget elementor-widget-image" data-id="3378ac8e" data-element_type="widget" data-settings="{&quot;_position&quot;:&quot;absolute&quot;,&quot;_transform_flipX_effect&quot;:&quot;transform&quot;,&quot;_animation&quot;:&quot;zoomIn&quot;}" data-widget_type="image.default">-->
@@ -903,11 +903,13 @@ gtag("config", "G-R30WMHF2H3");
                                                                         <div class="wdp-name namatamu" style="width: auto !important;"></div>
                                                                                     <div class="wdp-text" style="width: auto !important;font-family:'Tangerine',sans-serif !important;font-size:27px;" >Tanpa mengurangi rasa hormat, kami bermaksud mengundang Anda untuk menghadiri acara pernikahan kami.</div>
                                         
-                                                                        <div class="wdp-button-wrapper" id="wdp-button-wrapper">
-                                        <button class="elementor-button" style="font-family:'Tangerine',sans-serif !important">
-                                                                                        <span >
-                                                <i aria-hidden="true" class="far fa-envelope-open"></i>                                            </span>
-                                                                                        Buka Undangan                                        </button>
+                                    <div class="wdp-button-wrapper" id="wdp-button-wrapper">
+										<button class="elementor-button" style="font-family:'Tangerine',sans-serif !important" onclick="startVideo()">
+                                            <span >
+                                                <i aria-hidden="true" class="far fa-envelope-open"></i>
+											</span>
+                                            Buka Undangan
+										</button>
                                     </div>
                                                                     
                                                                         
@@ -974,6 +976,17 @@ gtag("config", "G-R30WMHF2H3");
 				return jQuery("<textarea></textarea>").html(str.replace(/\\/g,"")).text();
 			}
 		</script>
+		<script>
+    var video = document.getElementById("myVideo");
+
+    function startVideo() {
+        if (video.paused) {
+            video.play();
+        } else {
+            video.pause();
+        }
+    }
+</script>
 
         <style type="text/css">
             .elementor-button-qr {
